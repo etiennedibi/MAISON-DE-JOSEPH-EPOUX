@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+/* ============================================================
+   MAIJE — Design tokens (repris de la charte Los Niños)
+   ============================================================ */
+@theme {
+  /* Couleurs */
+  --color-primary: #09b1ab;
+  --color-primary-dark: #078b86;
+  --color-primary-soft: #ebf6f6;
+  --color-secondary: #2f2b2b;
+  --color-accent: #d78bcd;
+  --color-accent-soft: #fff1fb;
+  --color-tertiary: #8e8e8e;
+  --color-ink: #3e3e3e;
+  --color-cream: #f5f1ea;
+  --color-line: #e4e1db;
+  --color-sun: #fdbf62;
+  --color-sun-soft: #ffefab;
+  --color-coral: #f06d4f;
+  --color-sky: #47b1e4;
+
+  /* Typographies */
+  --font-display: "Fredoka One", "Fredoka", sans-serif;
+  --font-heading: "Fredoka", sans-serif;
+  --font-body: "League Spartan", sans-serif;
+
+  /* Rayons */
+  --radius-blob: 40px;
+
+  /* Animations */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-spin-slow: spin 24s linear infinite;
+  --animate-wiggle: wiggle 3s ease-in-out infinite;
+  --animate-marquee: marquee 28s linear infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) }
+  50% { transform: translateY(-18px) }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-4deg) }
+  50% { transform: rotate(4deg) }
+}
+@keyframes marquee {
+  from { transform: translateX(0) }
+  to { transform: translateX(-50%) }
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background: #fff;
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1;
+    color: var(--color-secondary);
+  }
+  h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-secondary);
+    line-height: 1.15;
+  }
+  h2 { font-weight: 600 }
+  h3 { font-weight: 600 }
+  h4, h5, h6 { font-weight: 500 }
+  ::selection {
+    background: var(--color-primary);
+    color: #fff;
+  }
+}
+
+/* ============================================================
+   Utilitaires
+   ============================================================ */
+@utility container-x {
+  width: 100%;
+  max-width: 1290px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* Trait de soulignement "crayon" sous un mot */
+@utility underline-sketch {
+  background-image: linear-gradient(transparent 62%, color-mix(in srgb, var(--color-sun) 70%, transparent) 62%);
+  background-size: 100% 100%;
+}
+
+/* Scrollbar discrète */
+::-webkit-scrollbar { width: 10px; height: 10px }
+::-webkit-scrollbar-track { background: var(--color-cream) }
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 999px;
+}
+
+/* Formes organiques réutilisables */
+.blob-1 { border-radius: 62% 38% 44% 56% / 51% 45% 55% 49% }
+.blob-2 { border-radius: 38% 62% 63% 37% / 41% 44% 56% 59% }
+.blob-3 { border-radius: 51% 49% 38% 62% / 62% 44% 56% 38% }
+
+/* Séparateur vague en bas de section */
+.wave-bottom {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0,40 C240,100 480,0 720,40 C960,80 1200,10 1440,50 L1440,100 L0,100 Z'/%3E%3C/svg%3E");
+  mask-size: 100% 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
