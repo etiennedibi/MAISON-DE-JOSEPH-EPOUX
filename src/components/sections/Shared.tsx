@@ -6,7 +6,8 @@ import Reveal, { Stagger, StaggerItem } from "../ui/Reveal";
 import { Button, ButtonLink } from "../ui/Button";
 import { FloatingDecor, Marquee } from "../ui/Decor";
 import { ArrowRight, Quote } from "../ui/Icons";
-import { gallery, posts, testimonials } from "../../data/site";
+import { posts, testimonials } from "../../data/site";
+import { photos, thumbSrc } from "../../data/gallery";
 
 /* ------------------------------------------------------------
    Bandeau de valeurs défilant
@@ -202,7 +203,10 @@ export function NewsletterSection() {
 /* ------------------------------------------------------------
    Galerie
    ------------------------------------------------------------ */
+/** Aperçu de la galerie : six vignettes qui renvoient vers la page complète. */
 export function GallerySection() {
+  const preview = photos.slice(0, 6);
+
   return (
     <section className="bg-white py-20 lg:py-24">
       <div className="container-x">
@@ -214,16 +218,19 @@ export function GallerySection() {
       </div>
 
       <Stagger className="mt-14 grid grid-cols-2 gap-3 px-3 sm:grid-cols-3 lg:grid-cols-6" gap={0.08}>
-        {gallery.map((src, i) => (
-          <StaggerItem key={src}>
-            <div className="group relative aspect-square overflow-hidden rounded-[24px]">
+        {preview.map((photo) => (
+          <StaggerItem key={photo.file}>
+            <Link
+              to="/galerie"
+              className="group relative block aspect-square overflow-hidden rounded-[24px]"
+            >
               <img
-                src={src}
-                alt={`Photo ${i + 1} des activités MAIJE`}
+                src={thumbSrc(photo)}
+                alt={photo.caption}
                 loading="lazy"
                 className="size-full object-cover transition-transform duration-700 group-hover:scale-115"
               />
-              <div className="absolute inset-0 grid place-items-center bg-primary/0 transition-colors duration-500 group-hover:bg-primary/70">
+              <span className="absolute inset-0 grid place-items-center bg-primary/0 transition-colors duration-500 group-hover:bg-primary/70">
                 <svg
                   viewBox="0 0 24 24"
                   className="size-8 scale-50 text-white opacity-0 transition-all duration-500 group-hover:scale-100 group-hover:opacity-100"
@@ -235,11 +242,17 @@ export function GallerySection() {
                   <circle cx="11" cy="11" r="7" />
                   <path d="m16.5 16.5 4 4M11 8v6M8 11h6" />
                 </svg>
-              </div>
-            </div>
+              </span>
+            </Link>
           </StaggerItem>
         ))}
       </Stagger>
+
+      <Reveal className="mt-12 text-center">
+        <ButtonLink to="/galerie" variant="outline">
+          Voir les {photos.length} photos <ArrowRight className="size-4" />
+        </ButtonLink>
+      </Reveal>
     </section>
   );
 }

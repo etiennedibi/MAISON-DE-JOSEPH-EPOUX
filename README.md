@@ -31,6 +31,7 @@ npm run preview  # prévisualiser le build
 | `/` | `src/pages/Home.tsx` | page d'accueil (hero repris de `home-shop`) |
 | `/a-propos` | `src/pages/About.tsx` | `about-us` |
 | `/activites` | `src/pages/Activities.tsx` | `timetable` |
+| `/galerie` | `src/pages/Gallery.tsx` | — (ajout MAIJE) |
 | `/blog` | `src/pages/Blog.tsx` | `blog-page` |
 | `/contact` | `src/pages/Contact.tsx` | `contacts` |
 
@@ -66,6 +67,27 @@ de pilule blanche flottante, puis redevient une barre pleine au scroll. C'est g�
 pas affectées.
 
 Pour changer la photo : remplacer `public/img/hero.jpg` (format paysage, ~1920 × 1180).
+
+## Galerie
+
+24 photos en 4 catégories (Ateliers, Vie du centre, Jeux & sport, Fêtes & sorties),
+filtrables, avec une visionneuse plein écran (flèches ← →, Échap, boutons, compteur,
+légende, préchargement des images voisines).
+
+Chaque photo existe en **deux tailles**, pour ne pas imposer plusieurs mégaoctets à des
+connexions mobiles :
+
+| Dossier | Usage | Poids total |
+| --- | --- | --- |
+| `public/gallery/thumb/` | grille, en `loading="lazy"` | ~1,4 Mo |
+| `public/gallery/full/` | visionneuse, chargé à l'ouverture uniquement | ~5,6 Mo |
+
+Les métadonnées sont dans `src/data/gallery.ts` : nom de fichier, légende, catégorie et
+`tall: true` pour les portraits, qui occupent deux rangées dans la mosaïque.
+
+**Ajouter une photo** : déposer le même nom de fichier dans les deux dossiers
+(vignette ~600 px, plein format ~1300 px de côté long, en WebP), puis ajouter une entrée
+dans `photos`. L'aperçu de l'accueil affiche automatiquement les six premières.
 
 ## Où modifier le contenu
 

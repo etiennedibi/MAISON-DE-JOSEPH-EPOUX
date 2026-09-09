@@ -29,6 +29,7 @@ export const nav = [
   { label: "Accueil", to: "/" },
   { label: "À propos", to: "/a-propos" },
   { label: "Activités", to: "/activites" },
+  { label: "Galerie", to: "/galerie" },
   { label: "Blog", to: "/blog" },
   { label: "Contact", to: "/contact" },
 ];
@@ -298,17 +299,7 @@ export const testimonials = [
   },
 ];
 
-/* ------------------------------------------------------------
-   Galerie
-   ------------------------------------------------------------ */
-export const gallery = [
-  "/img/gallery-1.webp",
-  "/img/gallery-2.webp",
-  "/img/gallery-3.webp",
-  "/img/gallery-4.webp",
-  "/img/gallery-5.webp",
-  "/img/gallery-6.webp",
-];
+/* La galerie a son propre fichier : voir src/data/gallery.ts */
 
 /* ------------------------------------------------------------
    Antennes / horaires
